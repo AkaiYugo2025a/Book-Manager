@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { updateAllBooks,getAllBooks, editBook, deleteBook } from '@/lib/api/api';
+//import { updateAllBooks,getAllBooks, editBook, deleteBook } from '@/lib/api/api';
+import { getAllBooks, editBook, deleteBook } from '@/lib/api/api';
 import { BookInf } from '@/types/types';
 import { useRouter } from 'next/navigation';
 
@@ -40,7 +41,6 @@ export default function Edit({ params }: { params: Promise<{ id: string }> }) {
 
   const handleDelete = async () => {
     await deleteBook(id);
-    updateAllBooks()
     router.push('/');
   };
 
