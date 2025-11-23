@@ -4,8 +4,12 @@ import { BrowserMultiFormatReader } from "@zxing/browser";
 import { Result } from "@zxing/library";
 import React, { useRef, useEffect, useState } from "react";
 import BookInfoOpenBd from "../../components/isbn-info/BookLookup";
+import { useRouter } from 'next/navigation';
+import { addBook } from '@/lib/api/api';
+import { BookInf } from '@/types/types';
 
 const IsbnScannerPage: React.FC = () => {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isbn, setIsbn] = useState<string | null>(null);
   const [scanning, setScanning] = useState(false);
@@ -44,6 +48,23 @@ const IsbnScannerPage: React.FC = () => {
   const stopScan = () => {
     setScanning(false);
     console.log('scan stop');
+  };
+
+  const targetBook: BookInf = {
+    id: crypto.randomUUID(),
+    category: 1,
+    isbn: "",
+    title: "",
+    author: "",
+    publisher: "",
+    date: "",
+    cover: "",
+  };
+
+  // 登録ボタン押下
+  const handleRegister = async () => {
+    await addBook(targetBook);
+    router.push('/');
   };
 
   useEffect(() => {
@@ -88,13 +109,25 @@ const IsbnScannerPage: React.FC = () => {
       </div>
       <div style={{ marginTop: 24 }}>
         {isbn ?
-          // <span>ISBN:{isbn}</span>
-          <BookInfoOpenBd
-            isbn={isbn}
-            onBookLoaded = { (book) => {
-              console.log("scan book:", book);
-            }}
-          />
+          <div>
+            <BookInfoOpenBd
+              isbn={isbn}
+              onBookLoaded={(book) => {
+                targetBook.isbn = book.isbn || "";
+                targetBook.title = book.title || "";
+                targetBook.author = book.author || "";
+                targetBook.publisher = book.publisher || "";
+                targetBook.date = book.date || "";
+                console.log("scan book:", book);
+              }}
+            />
+            <button
+              className="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold rounded-xl shadow"
+              onClick={handleRegister}
+            >
+              登録
+            </button>
+          </div>
           : <span>バーコードを読み取ってください</span>
         }
       </div>
