@@ -50,7 +50,7 @@ export const addBook = async (book: BookInf): Promise<BookInf> => {
 // 本情報 編集
 export const editBook = async (
   id: string,
-  newCategory: string,
+  newCategory: number,
   newIsbn: string,
   newTitle: string,
   newAuthor: string,

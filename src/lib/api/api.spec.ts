@@ -5,7 +5,7 @@ import { BookInf } from "../../types/types";
 const mockBooks: BookInf[] = [
     {
       "id": "1",
-      "category": "",
+      "category": 1,
       "isbn": "9784295020806",
       "title": "HTML & CSS全事典 : Web制作必携",
       "author": "加藤,善規 インプレス(2014年)",
@@ -15,7 +15,7 @@ const mockBooks: BookInf[] = [
     },
     {
       "id": "2",
-      "category": "",
+      "category": 1,
       "isbn": "9784295020807",
       "title": "HTML & CSS全事典 : Web制作必携",
       "author": "加藤,善規 インプレス(2014年)",
@@ -25,7 +25,7 @@ const mockBooks: BookInf[] = [
     },
     {
       "id": "3",
-      "category": "",
+      "category": 1,
       "isbn": "9784295020808",
       "title": "HTML & CSS全事典 : Web制作必携",
       "author": "加藤,善規 インプレス(2014年)",
@@ -38,7 +38,7 @@ const mockBooks: BookInf[] = [
 const mockNewBook: BookInf =
 {
   "id": "4",
-  "category": "0",
+  "category": 1,
   "isbn": "9784295020806",
   "title": "HTML & CSS全事典 : Web制作必携",
   "author": "加藤,善規 インプレス(2014年)",
@@ -49,7 +49,7 @@ const mockNewBook: BookInf =
 
 const mockUpdatedBook: BookInf = {
   id: '2',
-  category: "3",
+  category: 2,
   isbn: '9784295020807',
   title: '新タイトル',
   author: '新著者',
@@ -60,7 +60,7 @@ const mockUpdatedBook: BookInf = {
 
 const mockDeletedBook: BookInf = {
   id: '1',
-  category: "",
+  category: 1,
   isbn: '9784295020806',
   title: 'HTML & CSS全事典 : Web制作必携',
   author: '加藤,善規 インプレス(2014年)',
@@ -107,7 +107,7 @@ describe("BookInfo API logic", () => {
 
     const result = await editBook(
       '2',
-      "3",
+      2,
       '9784295020807',
       '新タイトル',
       '新著者',

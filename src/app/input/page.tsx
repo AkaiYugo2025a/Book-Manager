@@ -3,39 +3,47 @@
 import { useRouter } from 'next/navigation';
 import { addBook } from '@/lib/api/api';
 import { BookInf } from '@/types/types';
+import { useState } from "react";
+import IsbnInput from "../../components/isbn-info/IsbnSelector";
+import BookInfoOpenBd from "../../components/isbn-info/BookLookup";
 
 export default function Input() {
+  const [isbn, setIsbn] = useState("");
   const router = useRouter();
 
-  // ダミーの本情報（あとでフォーム化してもOK）
-  const dummyBook: BookInf = {
+  const targetBook: BookInf = {
     id: crypto.randomUUID(),
-    category: "0",
-//    isbn: "0000000000",
-    isbn: "1234567890",
-    title: "ダミー本",
-    author: "ダミー著者",
-    publisher: "ダミー出版社",
-    date: "2024-01-01",
+    category: 1,
+    isbn: "",
+    title: "",
+    author: "",
+    publisher: "",
+    date: "",
     cover: "",
   };
 
   // 登録ボタン押下
   const handleRegister = async () => {
-    await addBook(dummyBook);
+    await addBook(targetBook);
     router.push('/');
   };
 
   return (
     <div className="p-4 space-y-6">
 
-      {/* 本情報表示 */}
-      <div className="p-4 bg-white rounded-xl shadow">
-        <p><strong>ISBN:</strong> {dummyBook.isbn}</p>
-        <p><strong>タイトル:</strong> {dummyBook.title}</p>
-        <p><strong>著者:</strong> {dummyBook.author}</p>
-        <p><strong>出版社:</strong> {dummyBook.publisher}</p>
-        <p><strong>発行:</strong> {dummyBook.date}</p>
+      <div style={{ padding: 20 }}>
+        <IsbnInput onIsbnChange={setIsbn} />
+        <BookInfoOpenBd
+          isbn={isbn}
+          onBookLoaded = { (book) => {
+            targetBook.isbn = book.isbn || "";
+            targetBook.title = book.title || "";
+            targetBook.author = book.author || "";
+            targetBook.publisher = book.publisher || "";
+            targetBook.date = book.date || "";
+            console.log("Loaded book:", targetBook);
+          }}
+        />
       </div>
 
       {/* ボタン */}

@@ -27,7 +27,7 @@ export default function Edit({ params }: { params: Promise<{ id: string }> }) {
   const handleUpdate = async () => {
     await editBook(
       id,
-      String(book.category),
+      book.category,
       book.isbn,
       book.title,
       book.author,
