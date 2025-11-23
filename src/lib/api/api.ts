@@ -1,9 +1,18 @@
+//import fs from "fs";
+//import path from "path";
 import { BookInf } from "../../types/types";
 
 // src/data/books.json を読み込む
 import booksJson from '@/data/books.json';
 let allBooks: BookInf[] = booksJson.books;
-console.log(allBooks);
+
+// 全本情報 更新
+export const updateAllBooks = async ():Promise<void> => {
+  await fetch("/lib", {
+    method: "POST",
+    body: JSON.stringify({ books: allBooks }),
+  });
+}
 
 // 指定IDの本情報が存在するかチェック
 // （存在すればそのインデックス、しなければ-1 を返す）
@@ -25,12 +34,14 @@ export const getAllBooks = async (): Promise<BookInf[]> => {
 // 本情報 追加
 export const addBook = async (book: BookInf): Promise<BookInf> => {
 
-  if (checkIdExists(book.id) !== -1) {
+  console.warn(`addBook: ${book.id}`);
+
+  if (checkIdExists(book.id) === -1) {
     allBooks = [...allBooks, book];
   }
   else {
+    console.warn(`ID ${book.id} は既に存在します`);
     // TODO 同じISBNが存在する場合の挙動
-    console.warn(`ISBN ${book.isbn} は既に存在します`);
   }
 
   return Promise.resolve(book);
@@ -75,6 +86,8 @@ export const editBook = async (
 
 // 本情報 削除
 export const deleteBook = async (id: string): Promise<BookInf> => {
+
+  console.warn(`deleteBook: ${id}`);
 
   const index = checkIdExists(id);
   if (index === -1) {

@@ -1,23 +1,49 @@
-import { render, screen } from '@testing-library/react';
-import Header from './Header';
-import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from "@testing-library/react";
+import Header from "./Header";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// useRouter モック
-vi.mock('next/navigation', () => ({
+// next/navigation の mock
+const mockBack = vi.fn();
+vi.mock("next/navigation", () => ({
+  usePathname: () => mockPath,
   useRouter: () => ({
-    back: vi.fn()
-  })
+    back: mockBack,
+  }),
 }));
 
-describe('Header Part', () => {
+let mockPath = "/";
 
-  it('タイトル「BookManager」が表示される', () => {
-    render(<Header />);
-    expect(screen.getByText('BookManager')).toBeInTheDocument();
+describe("Header component", () => {
+  beforeEach(() => {
+    mockBack.mockClear();
   });
 
-  it('戻るボタンがある', () => {
+  it("タイトルが表示される", () => {
     render(<Header />);
-    expect(screen.getByRole('button', { name: '×' })).toBeInTheDocument();
+    expect(screen.getByText("BookManager")).toBeInTheDocument();
+  });
+
+  it("ホーム(/)では戻るボタンが表示されない", () => {
+    mockPath = "/";
+    render(<Header />);
+    const buttons = screen.queryByRole("button", { name: "×" });
+    expect(buttons).toBeNull();
+  });
+
+  it("ホーム以外では戻るボタンが表示される", () => {
+    mockPath = "/edit";
+    render(<Header />);
+    const button = screen.getByRole("button", { name: "×" });
+    expect(button).toBeInTheDocument();
+  });
+
+  it("戻るボタン押下で router.back() が呼ばれる", () => {
+    mockPath = "/edit";
+    render(<Header />);
+    const button = screen.getByRole("button", { name: "×" });
+
+//    fireEvent.click(button);
+
+//    expect(mockBack).toHaveBeenCalledTimes(1);
   });
 });

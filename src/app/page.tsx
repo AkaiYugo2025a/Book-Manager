@@ -29,11 +29,13 @@ export default function Home() {
           >
             <h2 className="font-bold text-lg">{b.title}</h2>
 
-            <div className="max-h-10 overflow-y-scroll text-sm text-gray-700">
+            {/* <div className="max-h-10 overflow-y-scroll text-sm text-gray-700"> */}
+            <div className="max-h-10 text-sm text-gray-700">
               {b.author}
             </div>
 
-            <div className="max-h-10 overflow-y-scroll text-sm text-gray-500">
+            {/* <div className="max-h-10 overflow-y-scroll text-sm text-gray-500"> */}
+            <div className="max-h-10 text-sm text-gray-500">
               {b.publisher}
             </div>
           </div>

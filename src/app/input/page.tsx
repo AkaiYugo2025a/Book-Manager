@@ -11,7 +11,8 @@ export default function Input() {
   const dummyBook: BookInf = {
     id: crypto.randomUUID(),
     category: "0",
-    isbn: "0000000000",
+//    isbn: "0000000000",
+    isbn: "1234567890",
     title: "ダミー本",
     author: "ダミー著者",
     publisher: "ダミー出版社",
@@ -30,10 +31,11 @@ export default function Input() {
 
       {/* 本情報表示 */}
       <div className="p-4 bg-white rounded-xl shadow">
+        <p><strong>ISBN:</strong> {dummyBook.isbn}</p>
         <p><strong>タイトル:</strong> {dummyBook.title}</p>
         <p><strong>著者:</strong> {dummyBook.author}</p>
         <p><strong>出版社:</strong> {dummyBook.publisher}</p>
-        <p><strong>ISBN:</strong> {dummyBook.isbn}</p>
+        <p><strong>発行:</strong> {dummyBook.date}</p>
       </div>
 
       {/* ボタン */}
