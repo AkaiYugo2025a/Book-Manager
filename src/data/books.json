@@ -2,7 +2,7 @@
   "books": [
     {
       "id": "1",
-      "category": 0,
+      "category": "",
       "isbn": "9784295020806",
       "title": "HTML & CSS全事典 : Web制作必携",
       "author": "加藤,善規 インプレス(2014年)",
@@ -12,8 +12,8 @@
     },
     {
       "id": "2",
-      "category": 0,
-      "isbn": "9784295020806",
+      "category": "",
+      "isbn": "9784295020807",
       "title": "HTML & CSS全事典 : Web制作必携",
       "author": "加藤,善規 インプレス(2014年)",
       "publisher": "インプレス",
@@ -22,8 +22,8 @@
     },
     {
       "id": "3",
-      "category": 0,
-      "isbn": "9784295020806",
+      "category": "",
+      "isbn": "9784295020808",
       "title": "HTML & CSS全事典 : Web制作必携",
       "author": "加藤,善規 インプレス(2014年)",
       "publisher": "インプレス",

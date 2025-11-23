@@ -10,7 +10,7 @@ export default function Input() {
   // ダミーの本情報（あとでフォーム化してもOK）
   const dummyBook: BookInf = {
     id: crypto.randomUUID(),
-    category: 0,
+    category: "0",
     isbn: "0000000000",
     title: "ダミー本",
     author: "ダミー著者",
